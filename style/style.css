@@ -264,6 +264,9 @@ dd
 { color: #35BDF5;
   text-decoration: none;}
 
+#footer a.active
+{ color: #F14E23;}
+
 .gallery img
 { position:absolute;}
 
