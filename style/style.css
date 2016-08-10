@@ -167,6 +167,9 @@ ul#menu li.current a
 ul#menu li a:hover
 { color: #F14E23;}
 
+dd
+{ margin-bottom: 10px; }
+
 #site_content
 { width: 950px;
   overflow: hidden;
