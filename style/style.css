@@ -175,6 +175,15 @@ ul#menu li a:hover
   background: #fff;
   border: 1px solid #E7E7E7;}
 
+.announcement
+{ float: left;
+  width: 90%;
+  margin: 0 24px 27px 0;
+  background: #FBFBFB;
+  border: 1px solid #eee;
+  padding: 0 15px 15px 15px;;
+}
+
 #sidebar_container
 { float: right;
   width: 250px;
@@ -196,6 +205,13 @@ ul#menu li a:hover
 { padding: 5px 0 0 0;}
 
 .paperclip
+{ float: left;
+  position: relative;
+  z-index: 0;
+  vertical-align: middle;
+  margin: -27px 0 -60px -30px;}
+
+.pin
 { float: left;
   position: relative;
   z-index: 0;
