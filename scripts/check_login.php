@@ -1,7 +1,7 @@
 <?PHP
-
 session_start();
 
-if ($_SESSION['user'] !== 'user') {
+if ($_SESSION['logged'] !== 'true') {
     header('Location: login.html');
 }
+?>

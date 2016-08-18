@@ -37,7 +37,20 @@
             <div id="sidebar_container">
                 <img class="paperclip" src="style/paperclip.png" alt="paperclip" />
                 <div class="sidebar">
-                    <!-- insert your sidebar items here -->
+                  <h3>User information</h3>
+                  <div class="imgcontainer">
+                      <img src="style/img_avatar2.png" alt="Avatar" class="avatar">
+                  </div>
+                  <?php
+                    echo "<h4>Username:</h4> {$_SESSION['username']}";
+                    echo "<h4>Role:</h4> {$_SESSION['role']}";
+                  ?>
+                  <br>
+                  <form action="scripts/logout.php">
+                    <button type="submit" class="cancelbtn">Log out</button>
+                  </form>
+                </div>
+                <div class="sidebar">
                     <h3>Latest News</h3>
                     <h4>Registration for Django: Under the Hood 2016 is now open!</h4>
                     <h5>25 July 2016 </h5>
