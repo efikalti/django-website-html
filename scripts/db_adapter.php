@@ -62,19 +62,21 @@
     try {
       $statement = $conn->prepare("select username from User where username = :username");
       $statement->execute(array(':username' => $username));
+      $count = $statement->rowCount();
       if ( $count === 0 )
       {
-        $sql = "INSERT INTO User (username, password, name, surname, role) VALUES ($username, $password, $name, $surname, $role)";
+        $sql = "INSERT INTO User (username, name, surname, password, role)
+        VALUES ('$username', '$name', '$surname', '$password', '$role')";
         $conn->exec($sql);
         find_user($username, $password);
       }
       else {
-        $_SESSION['errSignUp'] = 'User with that email already exists.'
+        $_SESSION['errSignUp'] = 'User with that email already exists.';
       }
 
     }
     catch(Exception $e) {
-        return $e;
+        echo $sql . "<br>" . $e->getMessage();
     }
     $conn = null;
   }

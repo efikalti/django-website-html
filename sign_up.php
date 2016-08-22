@@ -40,7 +40,7 @@
                         <label><b>Role</b></label>
                         <br>
                         <input type="radio" name="role" value="student" checked> Strudent<br>
-                        <input type="radio" name="role" value="turor"> Tutor<br>
+                        <input type="radio" name="role" value="tutor"> Tutor<br>
 
                         <button type="submit">Sign up</button>
                     </div>
