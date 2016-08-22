@@ -3,7 +3,7 @@ session_start();
 
 if ( $_SESSION["logged"] !== "true" )
 {
-  header ("Location: login.html");
+  header ("Location: login.php");
 }
 else
 {

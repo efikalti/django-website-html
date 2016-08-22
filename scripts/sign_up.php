@@ -4,7 +4,7 @@
 
    if($_SERVER["REQUEST_METHOD"] == "POST") {
 
-      find_user($_POST['username'], $_POST['password']);
+      create_user($_POST['username'], $_POST['password'],  $_POST['name'],  $_POST['surname'],  $_POST['role']);
       header("Location: ../home.php");
 
    }

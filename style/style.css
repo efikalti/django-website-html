@@ -362,7 +362,7 @@ table tr td {
 
 /* Full-width inputs */
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=email]{
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -428,4 +428,8 @@ span.psw {
     .cancelbtn {
         width: 100%;
     }
+}
+
+.error {
+color: #D8000C;
 }

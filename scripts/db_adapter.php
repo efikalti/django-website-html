@@ -16,7 +16,7 @@
       }
       catch(PDOException $e)
       {
-            echo "Connection failed: " . $e->getMessage();
+            return $e;
       }
    }
 
@@ -29,7 +29,6 @@
     }
 
     try {
-      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $statement = $conn->prepare("select * from User where username = :username and password = :password");
       $statement->execute(array(':username' => $username, ':password' => $password));
       $count = $statement->rowCount();
@@ -44,12 +43,40 @@
           $_SESSION['logged'] = 'true';
         }
       else {
-        echo "No user with that username or password.";
+          $_SESSION['errLogin'] = "Incorrect username or password.";
       }
     }
     catch(Exception $e) {
-        echo "Error: " . $e->getMessage();
+        return $e;
     }
     $conn = null;
   }
+
+  function create_user($username, $password, $name, $surname, $role)
+  {
+    global $conn;
+    if ( $conn === '')
+    {
+      connect();
+    }
+    try {
+      $statement = $conn->prepare("select username from User where username = :username");
+      $statement->execute(array(':username' => $username));
+      if ( $count === 0 )
+      {
+        $sql = "INSERT INTO User (username, password, name, surname, role) VALUES ($username, $password, $name, $surname, $role)";
+        $conn->exec($sql);
+        find_user($username, $password);
+      }
+      else {
+        $_SESSION['errSignUp'] = 'User with that email already exists.'
+      }
+
+    }
+    catch(Exception $e) {
+        return $e;
+    }
+    $conn = null;
+  }
+
 ?>

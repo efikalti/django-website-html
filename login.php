@@ -13,6 +13,8 @@
 </head>
 
 <body>
+    <?php  session_start(); ?>
+
     <div id="main">
               <div class="login">
                 <form action="scripts/login.php" method="post">
@@ -21,6 +23,12 @@
                     </div>
 
                     <div class="container">
+                        <?php if ($_SESSION['errLogin'])
+                              {
+                                echo "<div class='error'> *{$_SESSION['errLogin']} <br><br></div>";
+                                unset($_SESSION['errLogin']);
+                              }
+                        ?>
                         <label><b>Username</b></label>
                         <input type="text" placeholder="Enter Username" name="username" required>
 
@@ -29,8 +37,8 @@
 
                         <button type="submit">Login</button>
                     </div>
-                    <a href="https://www.djangoproject.com/weblog/2016/jul/25/registration-django-under-hood-2016-now-open/" target="_blank">Create account</a></p>
                 </form>
+                <p>Not a member? <a href="sign_up.php">Create account</a></p>
         </div>
     </div>
 </body>
