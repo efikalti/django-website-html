@@ -68,7 +68,6 @@
         $sql = "INSERT INTO User (username, name, surname, password, role)
         VALUES ('$username', '$name', '$surname', '$password', '$role')";
         $conn->exec($sql);
-        find_user($username, $password);
       }
       else {
         $_SESSION['errSignUp'] = 'User with that email already exists.';
@@ -80,5 +79,25 @@
     }
     $conn = null;
   }
+
+  function get_announcements()
+  {
+    global $conn;
+    if ( $conn === '')
+    {
+      connect();
+    }
+    try {
+      $statement = $conn->prepare("select * from Announcement", array(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true));
+      $statement->execute();
+      return $statement;
+
+    }
+    catch(Exception $e) {
+        echo $sql . "<br>" . $e->getMessage();
+    }
+    $conn = null;
+  }
+
 
 ?>

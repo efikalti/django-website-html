@@ -38,7 +38,6 @@
                         <button type="submit">Login</button>
                     </div>
                 </form>
-                <p>Not a member? <a href="sign_up.php">Create account</a></p>
         </div>
     </div>
 </body>

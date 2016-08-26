@@ -14,6 +14,9 @@
 
 <body>
 
+  <?php require 'scripts/check_login.php';
+        require 'scripts/check_tutor.php'; ?>
+
     <div id="main">
               <div class="login">
                 <form action="scripts/sign_up.php" method="post">
@@ -26,16 +29,16 @@
                               }
                         ?>
                         <label><b>Username</b></label>
-                        <input type="email" placeholder="Type your email.This will be your username." name="username" required>
+                        <input type="email" placeholder="Type the user's email.This will be their username." name="username" required>
 
                         <label><b>Password</b></label>
-                        <input type="password" placeholder="Choose a password for your account." name="password" required>
+                        <input type="password" placeholder="Choose a password for the account." name="password" required>
 
                         <label><b>Name</b></label>
-                        <input type="text" placeholder="Type your name." name="name" required>
+                        <input type="text" placeholder="Type the name." name="name" required>
 
                         <label><b>Surname</b></label>
-                        <input type="text" placeholder="Type your surname." name="surname" required>
+                        <input type="text" placeholder="Type the surname." name="surname" required>
 
                         <label><b>Role</b></label>
                         <br>

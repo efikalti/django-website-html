@@ -13,6 +13,10 @@
 </head>
 
 <body>
+
+  <?php require 'scripts/check_login.php';
+        include("scripts/db_adapter.php"); ?>
+
   <div id="main">
     <div id="header">
       <div id="logo">
@@ -22,7 +26,7 @@
       </div>
       <div id="menubar">
         <ul id="menu">
-          <li><a href="index.html">Home</a></li>
+          <li><a href="home.php">Home</a></li>
           <li class="current"><a href="#">Announcements</a></li>
           <li><a href="communication.html">Contact</a></li>
           <li><a href="documents.html">Documents</a></li>
@@ -61,42 +65,29 @@
       </div>
       <div id="content">
 
-        <div class="announcement">
-        <h2>First annoucement</h2>
-        <h3>Lesson starting date</h3>
-        <h5>10 August 2016</h5>
-        <p>The lessons for the academic year 2016-17 will begin on <em>October-10-2016</em>.<br>Details about the time and classroom will be announced at a later date.</p>
-        </div>
-
-        <div class="announcement">
-        <h2>Second annoucement</h2>
-        <h3>Lesson starting time and classroom</h3>
-        <h5>15 August 2016</h5>
-        <p>The time of the first lesson for the <em>October-10-2016</em> is <em>10.00 am</em> <strong>sharp</strong>.<br>
-           The lesson will take place at classroom A1 at building A.<br>You can ask for directions from the information's office in that building.</p>
-        </div>
-
-        <div class="announcement">
-        <h2>Third annoucement</h2>
-        <h3>Lesson starting time and classroom</h3>
-        <h5>15 August 2016</h5>
-        <p>The first optional project has been announced and you can find it's description at the <a href="homework.html">Projects</a> page.<br>
-           Deadline for the project is the first day of lessons.</p>
-        </div>
-
-        <a href="#top">Hop to top</a>
-
+        <?php
+          $data = get_announcements();
+          $result = $data->fetchAll();
+          foreach ($result as &$announcement) {
+              echo "<div class='announcement'>";
+              echo "<h3>Announcement {$announcement['id']}";
+              if ( $_SESSION['role'] === 'tutor' ){
+                echo "<font size='5'>[<a href='sign_up.php'>Modify</a>][<a href='sign_up.php'>Delete</a>]</font>";
+              }
+              echo "</h3>";
+              echo "<h2><strong>Subject:</strong> {$announcement['subject']}</h2>";
+              echo "<h5><strong>Date:</strong> {$announcement['date']}</h5>";
+              echo "<p>{$announcement['text']}</p>";
+              echo "</div>";
+          }
+        ?>
+      <div id="footer">
+          <p>
+              <a class="home" href="home.php">Home</a> |
+              <a class="active" href="#">Announcements</a> |
+              <a href="communication.html">Contact</a> |
+              <a href="documents.html">Documents</a> |
+              <a href="homework.html">Projects</a>
+          </p>
       </div>
-    </div>
-    <div id="footer">
-      <p>
-        <a href="index.html">Home</a> |
-        <a class="active" href="announcement.html">Announcements</a> |
-        <a href="communication.html">Contact</a> |
-        <a href="documents.html">Documents</a> |
-        <a href="homework.html">Projects</a>
-      </p>
-    </div>
-  </div>
-</body>
 </html>

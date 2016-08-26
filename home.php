@@ -14,7 +14,7 @@
 
 <body>
 
-  <?php require 'scripts/check_login.php'; ?>
+  <?php require 'scripts/check_login.php';?>
 
     <div id="main">
         <div id="header">
@@ -26,7 +26,7 @@
             <div id="menubar">
                 <ul id="menu">
                     <li class="current"><a href="#">Home</a></li>
-                    <li><a href="announcement.html">Announcements</a></li>
+                    <li><a href="announcement.php">Announcements</a></li>
                     <li><a href="communication.html">Contact</a></li>
                     <li><a href="documents.html">Documents</a></li>
                     <li><a href="homework.html">Projects</a></li>
@@ -44,6 +44,10 @@
                   <?php
                     echo "<h4>Username:</h4> {$_SESSION['username']}";
                     echo "<h4>Role:</h4> {$_SESSION['role']}";
+                    if ( $_SESSION['role'] === 'tutor' )
+                    {
+                      echo "<br><br><a href='sign_up.php'>Create an account</a></p>";
+                    }
                   ?>
                   <br>
                   <form action="scripts/logout.php">
@@ -111,7 +115,7 @@
         <div id="footer">
             <p>
                 <a class="active" href="#">Home</a> |
-                <a href="announcement.html">Announcements</a> |
+                <a href="announcement.php">Announcements</a> |
                 <a href="communication.html">Contact</a> |
                 <a href="documents.html">Documents</a> |
                 <a href="homework.html">Projects</a>
