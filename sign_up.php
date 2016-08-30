@@ -35,10 +35,10 @@
                         <input type="password" placeholder="Choose a password for the account." name="password" required>
 
                         <label><b>Name</b></label>
-                        <input type="text" placeholder="Type the name." name="name" required>
+                        <input type="sign_text" placeholder="Type the name." name="name" required>
 
                         <label><b>Surname</b></label>
-                        <input type="text" placeholder="Type the surname." name="surname" required>
+                        <input type="sign_text" placeholder="Type the surname." name="surname" required>
 
                         <label><b>Role</b></label>
                         <br>

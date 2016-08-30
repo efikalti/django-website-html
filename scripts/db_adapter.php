@@ -99,5 +99,40 @@
     $conn = null;
   }
 
+  function get_announcement($id)
+  {
+    global $conn;
+    if ( $conn === '')
+    {
+      connect();
+    }
+    try {
+      $statement = $conn->prepare("select * from Announcement where id = :id");
+      $statement->execute(array(':id' => $id));
+      return $statement;
+    }
+    catch(Exception $e) {
+        echo $sql . "<br>" . $e->getMessage();
+    }
+    $conn = null;
+  }
+
+  function modify_announcement()
+  {
+    global $conn;
+    if ( $conn === '')
+    {
+      connect();
+    }
+    try {
+      $statement = $conn->prepare("select * from Announcement where id = :id");
+      $statement->execute(array(':id' => $id));
+      return $statement;
+    }
+    catch(Exception $e) {
+        echo $sql . "<br>" . $e->getMessage();
+    }
+    $conn = null;
+  }
 
 ?>

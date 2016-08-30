@@ -15,7 +15,9 @@
 <body>
 
   <?php require 'scripts/check_login.php';
-        include("scripts/db_adapter.php"); ?>
+        include("scripts/db_adapter.php");
+        include("scripts/actions.php");
+  ?>
 
   <div id="main">
     <div id="header">
@@ -66,21 +68,54 @@
       <div id="content">
 
         <?php
+          if ( $_SESSION['role'] === 'tutor' ){
+            echo "<a href='sign_up.php'>Add announcement</a><br><br>";
+          }
+
           $data = get_announcements();
           $result = $data->fetchAll();
           foreach ($result as &$announcement) {
+
+            if ($_GET['announcement_id'] === $announcement['id'])
+            {
+
+              $data = get_announcement($_GET['announcement_id']);
+              $result = $data->fetchAll();
+              foreach ($result as &$announcement) {
+                  echo "<div class='announcement'>";
+                  echo "<form action='modify_announcement' method='post'>";
+                  echo "<h3>Announcement {$announcement['id']} </h3><br>";
+                  echo "<h2><strong>Subject:</strong></h2>";
+                  echo "<input type='text' value='{$announcement['subject']}' name='subject' required><br>";
+                  echo "<br><label><b>Text</b></label><br>";
+                  echo "<input type='text' value='{$announcement['text']}' name='name' required><br>";
+                  echo "<button class='okbtn' type='submit'>Ok</button>       ";
+                  echo "<button class='cancelbtn' value='cancel'>Cancel</button>";
+                  echo "</form>";
+                  echo "</div>";
+
+              }
+            }
+            else {
+
               echo "<div class='announcement'>";
               echo "<h3>Announcement {$announcement['id']}";
               if ( $_SESSION['role'] === 'tutor' ){
-                echo "<font size='5'>[<a href='sign_up.php'>Modify</a>][<a href='sign_up.php'>Delete</a>]</font>";
+                echo "<font size='5'>
+                     [<a href=announcement.php?announcement_id={$announcement['id']}>Modify</a>]
+                     [<a href='scripts/delete_announcement.php'>Delete</a>]
+                     </font>";
               }
               echo "</h3>";
               echo "<h2><strong>Subject:</strong> {$announcement['subject']}</h2>";
               echo "<h5><strong>Date:</strong> {$announcement['date']}</h5>";
               echo "<p>{$announcement['text']}</p>";
               echo "</div>";
+            }
           }
         ?>
+        <a href="#top">Hop to top</a>
+
       <div id="footer">
           <p>
               <a class="home" href="home.php">Home</a> |

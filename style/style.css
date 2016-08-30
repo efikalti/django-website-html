@@ -362,7 +362,7 @@ table tr td {
 
 /* Full-width inputs */
 
-input[type=text], input[type=password], input[type=email]{
+input[type=sign_text], input[type=password], input[type=email]{
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -389,6 +389,12 @@ button {
     width: auto;
     padding: 10px 18px;
     background-color: #f44336;
+}
+
+.okbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #4CAF50;
 }
 
 /* Center the avatar image inside this container */
@@ -432,4 +438,17 @@ span.psw {
 
 .error {
 color: #D8000C;
+}
+
+.link_button {
+  width: auto;
+  padding: 10px 18px 10px 10px;
+  background-color: #f44336;
+  font: bold 11px Arial;
+  text-decoration: none;
+  color: #333333;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
 }
