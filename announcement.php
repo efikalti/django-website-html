@@ -88,7 +88,23 @@
 
         <?php
           if ( $_SESSION['role'] === 'tutor' ){
-            echo "<a href='sign_up.php'>Add announcement</a><br><br>";
+            if ($_GET['create'] === 'true')
+            {
+              echo "<div class='announcement'>";
+              echo "<form action='scripts/modify.php' method='post'>";
+              echo "<h2><strong>Subject:</strong></h2>";
+              echo "<input type='text' placeholder='Type the subject of the announcement' name='subject' required><br>";
+              echo "<br><label><b>Text</b></label><br>";
+              echo "<input type='text' placeholder='Type the text of the announcement' name='text' required><br>";
+              echo "<input type='hidden' value='create' name='action'>";
+              echo "<button class='okbtn' type='submit'>Ok</button>       ";
+              echo "<button class='cancelbtn' value='cancel'>Cancel</button>";
+              echo "</form>";
+              echo "</div>";
+            }
+            else {
+              echo "<a href='announcement.php?create=true'>Add announcement</a><br><br>";
+            }
           }
 
           $data = get_announcements();

@@ -8,6 +8,11 @@
         modify_announcement($_POST['subject'], $_POST['text'], $_POST['id']);
         header("Location: ../announcement.php");
       }
+      elseif ($_POST['action'] === 'create')
+      {
+        create_announcement($_POST['subject'], $_POST['text']);
+        header("Location: ../announcement.php");
+      }
 
    }
 ?>

@@ -135,4 +135,22 @@
     $conn = null;
   }
 
+  function create_announcement($subject, $text)
+  {
+    global $conn;
+    if ( $conn === '')
+    {
+      connect();
+    }
+    try {
+      $sql = "INSERT INTO Announcement (subject, text, date) VALUES ('$subject', '$text', now())";
+      $conn->exec($sql);
+    }
+    catch(Exception $e) {
+        echo $sql . "<br>" . $e->getMessage();
+    }
+    $conn = null;
+  }
+
+
 ?>
