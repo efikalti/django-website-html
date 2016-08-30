@@ -117,7 +117,7 @@
     $conn = null;
   }
 
-  function modify_announcement()
+  function modify_announcement($subject, $text, $id)
   {
     global $conn;
     if ( $conn === '')
@@ -125,9 +125,9 @@
       connect();
     }
     try {
-      $statement = $conn->prepare("select * from Announcement where id = :id");
-      $statement->execute(array(':id' => $id));
-      return $statement;
+      $sql = "UPDATE Announcement SET subject='$subject', text='$text', date=now() WHERE id='$id'";
+      $stmt = $conn->prepare($sql);
+      $stmt->execute();
     }
     catch(Exception $e) {
         echo $sql . "<br>" . $e->getMessage();

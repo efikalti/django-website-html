@@ -40,6 +40,25 @@
       <div id="sidebar_container">
         <img class="paperclip" src="style/paperclip.png" alt="paperclip" />
         <div class="sidebar">
+          <h3>User information</h3>
+          <div class="imgcontainer">
+              <img src="style/img_avatar2.png" alt="Avatar" class="avatar">
+          </div>
+          <?php
+            echo "<h4>Username:</h4> {$_SESSION['username']}";
+            echo "<h4>Role:</h4> {$_SESSION['role']}";
+            if ( $_SESSION['role'] === 'tutor' )
+            {
+              echo "<br><br><a href='sign_up.php'>Create an account</a></p>";
+            }
+          ?>
+          <br>
+          <form action="scripts/logout.php">
+            <button type="submit" class="cancelbtn">Log out</button>
+          </form>
+        </div>
+        <img class="paperclip" src="style/paperclip.png" alt="paperclip" />
+        <div class="sidebar">
         <!-- insert your sidebar items here -->
         <h3>Latest News</h3>
         <h4>Registration for Django: Under the Hood 2016 is now open!</h4>
@@ -83,21 +102,21 @@
               $result = $data->fetchAll();
               foreach ($result as &$announcement) {
                   echo "<div class='announcement'>";
-                  echo "<form action='modify_announcement' method='post'>";
+                  echo "<form action='scripts/modify.php' method='post'>";
                   echo "<h3>Announcement {$announcement['id']} </h3><br>";
                   echo "<h2><strong>Subject:</strong></h2>";
                   echo "<input type='text' value='{$announcement['subject']}' name='subject' required><br>";
                   echo "<br><label><b>Text</b></label><br>";
-                  echo "<input type='text' value='{$announcement['text']}' name='name' required><br>";
+                  echo "<input type='text' value='{$announcement['text']}' name='text' required><br>";
+                  echo "<input type='hidden' value='{$announcement['id']}' name='id'>";
+                  echo "<input type='hidden' value='update' name='action'>";
                   echo "<button class='okbtn' type='submit'>Ok</button>       ";
                   echo "<button class='cancelbtn' value='cancel'>Cancel</button>";
                   echo "</form>";
                   echo "</div>";
-
               }
             }
             else {
-
               echo "<div class='announcement'>";
               echo "<h3>Announcement {$announcement['id']}";
               if ( $_SESSION['role'] === 'tutor' ){
