@@ -122,7 +122,7 @@
               if ( $_SESSION['role'] === 'tutor' ){
                 echo "<font size='5'>
                      [<a href=announcement.php?announcement_id={$announcement['id']}>Modify</a>]
-                     [<a href='scripts/delete_announcement.php'>Delete</a>]
+                     [<a href=scripts/delete.php?type=announcement&id={$announcement['id']}>Delete</a>]
                      </font>";
               }
               echo "</h3>";
