@@ -20,13 +20,19 @@
       }
    }
 
+   function check_connection()
+   {
+     global $conn;
+     if ( $conn === '')
+     {
+       connect();
+     }
+   }
+
   function find_user($username, $password)
   {
     global $conn;
-    if ( $conn === '')
-    {
-      connect();
-    }
+    check_connection();
 
     try {
       $statement = $conn->prepare("select * from User where username = :username and password = :password");
@@ -55,10 +61,8 @@
   function create_user($username, $password, $name, $surname, $role)
   {
     global $conn;
-    if ( $conn === '')
-    {
-      connect();
-    }
+    check_connection();
+
     try {
       $statement = $conn->prepare("select username from User where username = :username");
       $statement->execute(array(':username' => $username));
@@ -83,10 +87,8 @@
   function get_announcements()
   {
     global $conn;
-    if ( $conn === '')
-    {
-      connect();
-    }
+    check_connection();
+
     try {
       $statement = $conn->prepare("select * from Announcement", array(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true));
       $statement->execute();
@@ -102,10 +104,8 @@
   function get_announcement($id)
   {
     global $conn;
-    if ( $conn === '')
-    {
-      connect();
-    }
+    check_connection();
+
     try {
       $statement = $conn->prepare("select * from Announcement where id = :id");
       $statement->execute(array(':id' => $id));
@@ -120,10 +120,8 @@
   function modify_announcement($subject, $text, $id)
   {
     global $conn;
-    if ( $conn === '')
-    {
-      connect();
-    }
+    check_connection();
+
     try {
       $sql = "UPDATE Announcement SET subject='$subject', text='$text', date=now() WHERE id='$id'";
       $stmt = $conn->prepare($sql);
@@ -138,10 +136,8 @@
   function create_announcement($subject, $text)
   {
     global $conn;
-    if ( $conn === '')
-    {
-      connect();
-    }
+    check_connection();
+
     try {
       $sql = "INSERT INTO Announcement (subject, text, date) VALUES ('$subject', '$text', now())";
       $conn->exec($sql);
@@ -155,13 +151,74 @@
   function delete_announcement($id)
   {
     global $conn;
-    if ( $conn === '')
-    {
-      connect();
-    }
+    check_connection();
+
     try {
       $sql = "DELETE FROM Announcement WHERE id='$id'";
       $conn->exec($sql);
+    }
+    catch(Exception $e) {
+        echo $sql . "<br>" . $e->getMessage();
+    }
+    $conn = null;
+  }
+
+
+  function get_assignments()
+  {
+    global $conn;
+    check_connection();
+
+    try {
+      $statement = $conn->prepare("select * from Assignment", array(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true));
+      $statement->execute();
+      return $statement;
+
+    }
+    catch(Exception $e) {
+        echo $sql . "<br>" . $e->getMessage();
+    }
+    $conn = null;
+  }
+  function create_assignment($description, $goals, $deadline, $files)
+  {
+    global $conn;
+    check_connection();
+
+    try {
+      $sql = "INSERT INTO Assignment (description, goals, deadline, files) VALUES ('$description', '$goals', now(), '$files')";
+      $conn->exec($sql);
+    }
+    catch(Exception $e) {
+        echo $sql . "<br>" . $e->getMessage();
+    }
+    $conn = null;
+  }
+
+  function delete_assignment($id)
+  {
+    global $conn;
+    check_connection();
+
+    try {
+      $sql = "DELETE FROM Assignment WHERE id='$id'";
+      $conn->exec($sql);
+    }
+    catch(Exception $e) {
+        echo $sql . "<br>" . $e->getMessage();
+    }
+    $conn = null;
+  }
+
+  function modify_assignment($description, $goals, $deadline, $files, $id)
+  {
+    global $conn;
+    check_connection();
+
+    try {
+      $sql = "UPDATE Assignment SET description='$description', goals='$goals', deadline=now(), files='$files' WHERE id='$id'";
+      $stmt = $conn->prepare($sql);
+      $stmt->execute();
     }
     catch(Exception $e) {
         echo $sql . "<br>" . $e->getMessage();

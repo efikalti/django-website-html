@@ -14,7 +14,8 @@
 
 <body>
 
-  <?php require 'scripts/check_login.php'; ?>
+  <?php require 'scripts/check_login.php';
+        include 'scripts/db_adapter.php'; ?>
 
   <div id="main">
     <div id="header">
@@ -89,12 +90,17 @@
             {
               echo "<div class='announcement'>";
               echo "<form action='scripts/modify.php' method='post'>";
-              echo "<h2><strong>Subject:</strong></h2>";
-              echo "<input type='text' placeholder='Type the subject of the announcement' name='subject'><br>";
-              echo "<br><label><b>Text</b></label><br>";
-              echo "<input type='text' placeholder='Type the text of the announcement' name='text'><br>";
+              echo "<h2><strong>Goals:</strong></h2>";
+              echo "<input type='textarea' placeholder='Type the goals of the assignment separated by commas' name='goals'><br>";
+              echo "<br><label><b>Description</b></label><br>";
+              echo "<input type='textarea' placeholder='Type the description of the assignment' name='description'><br>";
+              echo "<br><label><b>Files</b></label><br>";
+              echo "<input type='textarea' placeholder='List the deriverables files for the assignment separated by commas' name='files'><br>";
+              echo "<br><label><b>Deadline</b></label><br>";
+              echo "<input type='date' placeholder='Deadline for this assignment' name='date'><br>";
               echo "<input type='hidden' value='create' name='action'>";
-              echo "<button class='okbtn' type='submit'>Ok</button>       ";
+              echo "<input type='hidden' value='assignment' name='category'>";
+              echo "<button class='okbtn' type='submit'>Ok</button>    ";
               echo "<button class='cancelbtn' type='submit' name='cancel' value='cancel'>Cancel</button>";
               echo "</form>";
               echo "</div>";
@@ -104,53 +110,64 @@
             }
           }
 
-          $data = get_announcements();
+          $data = get_assignments();
           $result = $data->fetchAll();
-          foreach ($result as &$announcement) {
+          foreach ($result as &$assignment) {
 
-            if ($_GET['announcement_id'] === $announcement['id'])
+            if ($_GET['assignment_id'] === $assignment['id'])
             {
               echo "<div class='announcement'>";
-              echo "<a name='{$announcement['id']}'></a>";
+              echo "<a name='{$assignment['id']}'></a>";
               echo "<form action='scripts/modify.php' method='post'>";
-              echo "<h3>Announcement {$announcement['id']} </h3><br>";
-              echo "<h2><strong>Subject:</strong></h2>";
-              echo "<input type='text' value='{$announcement['subject']}' name='subject'><br>";
-              echo "<br><label><b>Text</b></label><br>";
-              echo "<input type='text' value='{$announcement['text']}' name='text'><br>";
-              echo "<input type='hidden' value='{$announcement['id']}' name='id'>";
+              echo "<h3>Assignment {$assignment['id']} </h3><br>";
+              echo "<h2><strong>Goals:</strong></h2>";
+              echo "<input type='textarea' value='{$assignment['goals']}' name='goals'><br>";
+              echo "<br><label><b>Description</b></label><br>";
+              echo "<input type='textarea' value='{$assignment['description']}' name='description'><br>";
+              echo "<h2><strong>Files:</strong></h2>";
+              echo "<input type='textarea' value='{$assignment['files']}' name='files'><br>";
+              echo "<h2><strong>Deadline:</strong></h2>";
+              echo "<input type='date' value='{$assignment['deadline']}' name='deadline'><br>";
+              echo "<input type='hidden' value='{$assignment['id']}' name='id'>";
               echo "<input type='hidden' value='update' name='action'>";
-              echo "<button class='okbtn' type='submit'>Ok</button>       ";
-              echo "<button class='cancelbtn' value='cancel'>Cancel</button>";
+              echo "<input type='hidden' value='assignment' name='category'>";
+              echo "<button class='okbtn' type='submit'>Ok</button>      ";
+              echo "<button class='cancelbtn' type='submit' name='cancel' value='cancel'>Cancel</button>";
               echo "</form>";
               echo "</div>";
             }
             else {
               echo "<div class='announcement'>";
-              echo "<h3>Announcement {$announcement['id']}";
+              $goals = explode(",", $assignment['goals']);
+              echo "<h3>Assignment {$assignment['id']}";
               if ( $_SESSION['role'] === 'tutor' ){
                 echo "<font size='5'>
-                     [<a href=announcement.php?announcement_id={$announcement['id']}#{$announcement['id']}>Modify</a>]
-                     [<a href=scripts/modify.php?delete=true&announcement_id={$announcement['id']}>Delete</a>]
+                     [<a href=homework.php?assignment_id={$assignment['id']}#{$assignment['id']}>Modify</a>]
+                     [<a href=scripts/modify.php?delete=true&category=assignment&assignment_id={$assignment['id']}>Delete</a>]
                      </font>";
               }
               echo "</h3>";
-              echo "<h2><strong>Subject:</strong> {$announcement['subject']}</h2>";
-              echo "<h5><strong>Date:</strong> {$announcement['date']}</h5>";
-              echo "<p>{$announcement['text']}</p>";
+              echo "<h2><strong>Goals:</strong></h2>";
+              echo "  <ol type='1'>";
+              foreach ($goals as &$goal){
+                echo "<li>$goal</li>";
+              }
+              echo "</ol>";
+              echo "<p><b>Description</b><br>{$assignment['description']}</p>";
+              echo "<h2>Files</h2>";
+              $files = explode(",", $assignment['files']);
+              echo "  <ol type='1'>";
+              foreach ($files as &$file){
+                echo "<li>$file</li>";
+              }
+              echo "</ol>";
+              echo "<br><label><b>Files</b></label><br>";
+
+              echo "<h5><strong>Deadline:</strong> {$assignment['deadline']}</h5>";
               echo "</div>";
             }
           }
         ?>
-
-        <div class="announcement">
-        <h2>First optional assignment</h2>
-        <h3>Getting started with Django</h3>
-        <h5>15 August 2016</h5>
-        <p>For the first optional assignment of this lesson you are asked to download and install the Django Web Framework on your computer.<br>
-           You can do so by following the instructions from the Django webpage, <a href="https://docs.djangoproject.com/en/1.10/intro/install/" target="_blank">here</a> .</p>
-           <br>The version we will be using is <em>1.10</em> .
-        </div>
 
         <a href="#top">Hop to top</a>
 
