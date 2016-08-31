@@ -152,5 +152,22 @@
     $conn = null;
   }
 
+  function delete_announcement($id)
+  {
+    global $conn;
+    if ( $conn === '')
+    {
+      connect();
+    }
+    try {
+      $sql = "DELETE FROM Announcement WHERE id='$id'";
+      $conn->exec($sql);
+    }
+    catch(Exception $e) {
+        echo $sql . "<br>" . $e->getMessage();
+    }
+    $conn = null;
+  }
+
 
 ?>

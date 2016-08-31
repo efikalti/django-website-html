@@ -29,7 +29,7 @@
                     <li><a href="announcement.php">Announcements</a></li>
                     <li><a href="communication.html">Contact</a></li>
                     <li><a href="documents.html">Documents</a></li>
-                    <li><a href="homework.html">Projects</a></li>
+                    <li><a href="homework.php">Projects</a></li>
                 </ul>
             </div>
         </div>
@@ -118,7 +118,7 @@
                 <a href="announcement.php">Announcements</a> |
                 <a href="communication.html">Contact</a> |
                 <a href="documents.html">Documents</a> |
-                <a href="homework.html">Projects</a>
+                <a href="homework.php">Projects</a>
             </p>
         </div>
     </div>

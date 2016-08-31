@@ -14,8 +14,7 @@
 
 <body>
 
-  <?php require 'scripts/check_login.php';
-        include 'scripts/db_adapter.php'; ?>
+  <?php require 'scripts/check_login.php'; ?>
 
   <div id="main">
     <div id="header">
@@ -26,11 +25,11 @@
       </div>
       <div id="menubar">
         <ul id="menu">
-          <li><a href="home.php">Home</a></li>
-          <li class="current"><a href="#">Announcements</a></li>
+          <li><a href="index.php">Home</a></li>
+          <li><a href="announcement.php">Announcements</a></li>
           <li><a href="communication.html">Contact</a></li>
           <li><a href="documents.html">Documents</a></li>
-          <li><a href="homework.php">Projects</a></li>
+          <li class="current"><a href="#">Projects</a></li>
         </ul>
       </div>
     </div>
@@ -95,14 +94,13 @@
               echo "<br><label><b>Text</b></label><br>";
               echo "<input type='text' placeholder='Type the text of the announcement' name='text'><br>";
               echo "<input type='hidden' value='create' name='action'>";
-              echo "<input type='hidden' value='announcement' name='category'>";
               echo "<button class='okbtn' type='submit'>Ok</button>       ";
               echo "<button class='cancelbtn' type='submit' name='cancel' value='cancel'>Cancel</button>";
               echo "</form>";
               echo "</div>";
             }
             else {
-              echo "<a href='announcement.php?create=true'>Add announcement</a><br><br>";
+              echo "<a href='homework.php?create=true'>Add project</a><br><br>";
             }
           }
 
@@ -122,9 +120,8 @@
               echo "<input type='text' value='{$announcement['text']}' name='text'><br>";
               echo "<input type='hidden' value='{$announcement['id']}' name='id'>";
               echo "<input type='hidden' value='update' name='action'>";
-              echo "<input type='hidden' value='announcement' name='category'>";
               echo "<button class='okbtn' type='submit'>Ok</button>       ";
-              echo "<button class='cancelbtn'  name='cancel' value='cancel'>Cancel</button>";
+              echo "<button class='cancelbtn' value='cancel'>Cancel</button>";
               echo "</form>";
               echo "</div>";
             }
@@ -134,7 +131,7 @@
               if ( $_SESSION['role'] === 'tutor' ){
                 echo "<font size='5'>
                      [<a href=announcement.php?announcement_id={$announcement['id']}#{$announcement['id']}>Modify</a>]
-                     [<a href=scripts/modify.php?delete=true&category=announcement&announcement_id={$announcement['id']}>Delete</a>]
+                     [<a href=scripts/modify.php?delete=true&announcement_id={$announcement['id']}>Delete</a>]
                      </font>";
               }
               echo "</h3>";
@@ -146,15 +143,29 @@
           }
         ?>
 
-      <a href="#top">Hop to top</a>
+        <div class="announcement">
+        <h2>First optional assignment</h2>
+        <h3>Getting started with Django</h3>
+        <h5>15 August 2016</h5>
+        <p>For the first optional assignment of this lesson you are asked to download and install the Django Web Framework on your computer.<br>
+           You can do so by following the instructions from the Django webpage, <a href="https://docs.djangoproject.com/en/1.10/intro/install/" target="_blank">here</a> .</p>
+           <br>The version we will be using is <em>1.10</em> .
+        </div>
 
-      <div id="footer">
-          <p>
-              <a class="home" href="home.php">Home</a> |
-              <a class="active" href="#">Announcements</a> |
-              <a href="communication.html">Contact</a> |
-              <a href="documents.html">Documents</a> |
-              <a href="homework.php">Projects</a>
-          </p>
+        <a href="#top">Hop to top</a>
+
+
       </div>
+    </div>
+    <div id="footer">
+      <p>
+        <a href="index.html">Home</a> |
+        <a href="announcement.html">Announcements</a> |
+        <a href="communication.html">Contact</a> |
+        <a href="documents.html">Documents</a> |
+        <a class="active" href="#">Projects</a>
+      </p>
+    </div>
+  </div>
+</body>
 </html>
