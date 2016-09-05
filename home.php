@@ -28,7 +28,7 @@
                     <li class="current"><a href="#">Home</a></li>
                     <li><a href="announcement.php">Announcements</a></li>
                     <li><a href="communication.html">Contact</a></li>
-                    <li><a href="documents.html">Documents</a></li>
+                    <li><a href="documents.php">Documents</a></li>
                     <li><a href="homework.php">Projects</a></li>
                 </ul>
             </div>
@@ -117,7 +117,7 @@
                 <a class="active" href="#">Home</a> |
                 <a href="announcement.php">Announcements</a> |
                 <a href="communication.html">Contact</a> |
-                <a href="documents.html">Documents</a> |
+                <a href="documents.php">Documents</a> |
                 <a href="homework.php">Projects</a>
             </p>
         </div>

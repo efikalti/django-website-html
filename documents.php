@@ -27,9 +27,9 @@
       <div id="menubar">
         <ul id="menu">
           <li><a href="home.php">Home</a></li>
-          <li class="current"><a href="#">Announcements</a></li>
+          <li><a href="announcement.php">Announcements</a></li>
           <li><a href="communication.html">Contact</a></li>
-          <li><a href="documents.php">Documents</a></li>
+          <li class="current"><a href="#">Documents</a></li>
           <li><a href="homework.php">Projects</a></li>
         </ul>
       </div>
@@ -85,80 +85,67 @@
         </div>
       </div>
       <div id="content">
-      <h1>Announcements</h1>
-
+        <h1>Documents</h1>
 
         <?php
           if ( $_SESSION['role'] === 'tutor' ){
-            if ($_GET['create'] === 'true')
+            if (isset($_GET['create']) && $_GET['create'] === 'true')
             {
               echo "<div class='announcement'>";
-              echo "<form action='scripts/modify.php' method='post'>";
-              echo "<h2><strong>Subject:</strong></h2>";
-              echo "<input type='text' placeholder='Type the subject of the announcement' name='subject'><br>";
-              echo "<br><label><b>Text</b></label><br>";
-              echo "<input type='text' placeholder='Type the text of the announcement' name='text'><br>";
+              echo "<form action='scripts/modify.php' method='post' enctype='multipart/form-data'>";
+              echo "<h2><strong>Description:</strong></h2>";
+              echo "<input type='text' placeholder='Type a description for the file' name='description'><br>";
+              echo "<br><label><b>File</b></label><br>";
+              if ($_SESSION['errFile'])
+              {
+                echo "<div class='error'> *{$_SESSION['errFile']} <br><br></div>";
+                unset($_SESSION['errFile']);
+              }
+              echo "<input type='file' name='file' id='file'>";
               echo "<input type='hidden' value='create' name='action'>";
-              echo "<input type='hidden' value='announcement' name='category'>";
+              echo "<input type='hidden' value='file' name='category'>";
+              echo "<br>";
               echo "<button class='okbtn' type='submit'>Ok</button>       ";
               echo "<button class='cancelbtn' type='submit' name='cancel' value='cancel'>Cancel</button>";
               echo "</form>";
               echo "</div>";
             }
             else {
-              echo "<a href='announcement.php?create=true'>Add announcement</a><br><br>";
+              echo "<a href='documents.php?create=true'>Add file</a><br><br>";
             }
           }
 
-          $data = get_announcements();
+          $data = get_files();
           $result = $data->fetchAll();
-          foreach ($result as &$announcement) {
-
-            if ($_GET['announcement_id'] === $announcement['id'])
-            {
+          foreach ($result as &$file) {
               echo "<div class='announcement'>";
-              echo "<a name='{$announcement['id']}'></a>";
-              echo "<form action='scripts/modify.php' method='post'>";
-              echo "<h3>Announcement {$announcement['id']} </h3><br>";
-              echo "<h2><strong>Subject:</strong></h2>";
-              echo "<input type='text' value='{$announcement['subject']}' name='subject'><br>";
-              echo "<br><label><b>Text</b></label><br>";
-              echo "<input type='text' value='{$announcement['text']}' name='text'><br>";
-              echo "<input type='hidden' value='{$announcement['id']}' name='id'>";
-              echo "<input type='hidden' value='update' name='action'>";
-              echo "<input type='hidden' value='announcement' name='category'>";
-              echo "<button class='okbtn' type='submit'>Ok</button>       ";
-              echo "<button class='cancelbtn'  name='cancel' value='cancel'>Cancel</button>";
-              echo "</form>";
-              echo "</div>";
-            }
-            else {
-              echo "<div class='announcement'>";
-              echo "<h3>Announcement {$announcement['id']}";
+              echo "<h3>File {$file['id']}";
               if ( $_SESSION['role'] === 'tutor' ){
                 echo "<font size='5'>
-                     [<a href=announcement.php?announcement_id={$announcement['id']}#{$announcement['id']}>Modify</a>]
-                     [<a href=scripts/modify.php?delete=true&category=announcement&announcement_id={$announcement['id']}>Delete</a>]
+                     [<a href=scripts/modify.php?delete=true&category=file&filename={$file['filename']}&file_id={$file['id']}>Delete</a>]
                      </font>";
               }
               echo "</h3>";
-              echo "<h2><strong>Subject:</strong> {$announcement['subject']}</h2>";
-              echo "<h5><strong>Date:</strong> {$announcement['date']}</h5>";
-              echo "<p>{$announcement['text']}</p>";
+              echo "<h2><strong>Description:</strong> {$file['description']}</h2>";
+              echo "<h5><strong>File: {$file['filename']} </strong></h5>";
+              echo "<a href={$file['filename']} download>Download</a>";
               echo "</div>";
-            }
           }
         ?>
 
-      <a href="#top">Hop to top</a>
+        <a href="#top">Hop to top</a>
 
-      <div id="footer">
-          <p>
-              <a class="home" href="home.php">Home</a> |
-              <a class="active" href="#">Announcements</a> |
-              <a href="communication.html">Contact</a> |
-              <a href="documents.php">Documents</a> |
-              <a href="homework.php">Projects</a>
-          </p>
       </div>
+    </div>
+    <div id="footer">
+      <p>
+        <a href="home.php">Home</a> |
+        <a href="announcement.php">Announcements</a> |
+        <a href="communication.html">Contact</a> |
+        <a class="active" href="#">Documents</a> |
+        <a href="homework.php">Projects</a>
+      </p>
+    </div>
+  </div>
+</body>
 </html>

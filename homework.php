@@ -29,7 +29,7 @@
           <li><a href="index.php">Home</a></li>
           <li><a href="announcement.php">Announcements</a></li>
           <li><a href="communication.html">Contact</a></li>
-          <li><a href="documents.html">Documents</a></li>
+          <li><a href="documents.php">Documents</a></li>
           <li class="current"><a href="#">Projects</a></li>
         </ul>
       </div>
@@ -83,6 +83,7 @@
         </div>
       </div>
       <div id="content">
+      <h1>Assignments</h1>
 
         <?php
           if ( $_SESSION['role'] === 'tutor' ){
@@ -97,7 +98,50 @@
               echo "<br><label><b>Files</b></label><br>";
               echo "<input type='textarea' placeholder='List the deriverables files for the assignment separated by commas' name='files'><br>";
               echo "<br><label><b>Deadline</b></label><br>";
-              echo "<input type='date' placeholder='Deadline for this assignment' name='date'><br>";
+              if ($_SESSION['errDate'])
+              {
+                echo "<div class='error'> *{$_SESSION['errDate']} <br><br></div>";
+                unset($_SESSION['errDate']);
+              }
+              echo "<p>";
+              echo "Hour:  <select name='hour' size=1>";
+              $days = "";
+              for ($i = 1; $i <= 24; $i++) {
+                  if ( $i < 10 ){
+                    $i = "0" . $i;
+                  }
+                  $part = "<option value='$i'>$i</option>";
+                  $days .= $part;
+              }
+              echo "$days";
+              echo "</select>";
+              echo "   Day:  <select name='day' size=1>";
+              $days = "";
+              for ($i = 1; $i <= 31; $i++) {
+                  if ( $i < 10 ){
+                    $i = "0" . $i;
+                  }
+                  $part = "<option value='$i'>$i</option>";
+                  $days .= $part;
+              }
+              echo "$days";
+              echo "</select>";
+              echo "   Month:  <select name='month' size=1>";
+              $months = "";
+              for ($i = 1; $i <= 12; $i++) {
+                  if ( $i < 10 ){
+                    $i = "0" . $i;
+                  }
+                  $part = "<option value='$i'>$i</option>";
+                  $months .= $part;
+              }
+              echo "$months";
+              echo "</select>";
+              echo "  Year:  <select name='year' size=1>";
+              echo "<option value='2016'>2016</option>";
+              echo "<option value='2017'>2017</option>";
+              echo "</select>";
+              echo "</p>";
               echo "<input type='hidden' value='create' name='action'>";
               echo "<input type='hidden' value='assignment' name='category'>";
               echo "<button class='okbtn' type='submit'>Ok</button>    ";
@@ -179,7 +223,7 @@
         <a href="index.html">Home</a> |
         <a href="announcement.html">Announcements</a> |
         <a href="communication.html">Contact</a> |
-        <a href="documents.html">Documents</a> |
+        <a href="documents.php">Documents</a> |
         <a class="active" href="#">Projects</a>
       </p>
     </div>

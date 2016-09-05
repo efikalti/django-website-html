@@ -180,13 +180,13 @@
     }
     $conn = null;
   }
-  function create_assignment($description, $goals, $deadline, $files)
+  function create_assignment($description, $goals, $deadline, $files, $date)
   {
     global $conn;
     check_connection();
 
     try {
-      $sql = "INSERT INTO Assignment (description, goals, deadline, files) VALUES ('$description', '$goals', now(), '$files')";
+      $sql = "INSERT INTO Assignment (description, goals, deadline, files) VALUES ('$description', '$goals', '$deadline', '$files')";
       $conn->exec($sql);
     }
     catch(Exception $e) {
@@ -226,5 +226,67 @@
     $conn = null;
   }
 
+
+  function get_files()
+  {
+    global $conn;
+    check_connection();
+
+    try {
+      $statement = $conn->prepare("select * from File", array(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true));
+      $statement->execute();
+      return $statement;
+
+    }
+    catch(Exception $e) {
+        echo $sql . "<br>" . $e->getMessage();
+    }
+    $conn = null;
+  }
+  function create_file($description, $filename)
+  {
+    global $conn;
+    check_connection();
+
+    try {
+      $sql = "INSERT INTO File (description, filename) VALUES ('$description', '$filename')";
+      $conn->exec($sql);
+    }
+    catch(Exception $e) {
+        echo $sql . "<br>" . $e->getMessage();
+    }
+    $conn = null;
+  }
+
+  function delete_file($id, $filename)
+  {
+    global $conn;
+    check_connection();
+
+    try {
+      $sql = "DELETE FROM File WHERE id='$id'";
+      $conn->exec($sql);
+    }
+    catch(Exception $e) {
+        echo $sql . "<br>" . $e->getMessage();
+    }
+    $conn = null;
+  }
+
+  function modify_file($description, $filename, $id)
+  {
+    global $conn;
+    check_connection();
+
+    try {
+      $sql = "UPDATE File SET description='$description', filename='$filename' WHERE id='$id'";
+      $stmt = $conn->prepare($sql);
+      $stmt->execute();
+    }
+    catch(Exception $e) {
+        echo $sql . "<br>" . $e->getMessage();
+    }
+    $conn = null;
+  }
 
 ?>
