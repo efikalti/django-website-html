@@ -28,7 +28,7 @@
         <ul id="menu">
           <li><a href="home.php">Home</a></li>
           <li><a href="announcement.php">Announcements</a></li>
-          <li><a href="communication.html">Contact</a></li>
+          <li><a href="communication.php">Contact</a></li>
           <li class="current"><a href="#">Documents</a></li>
           <li><a href="homework.php">Projects</a></li>
         </ul>
@@ -92,6 +92,7 @@
             if (isset($_GET['create']) && $_GET['create'] === 'true')
             {
               echo "<div class='announcement'>";
+              echo "<div class='form_settings'>";
               echo "<form action='scripts/modify.php' method='post' enctype='multipart/form-data'>";
               echo "<h2><strong>Description:</strong></h2>";
               echo "<input type='text' placeholder='Type a description for the file' name='description'><br>";
@@ -108,6 +109,7 @@
               echo "<button class='okbtn' type='submit'>Ok</button>       ";
               echo "<button class='cancelbtn' type='submit' name='cancel' value='cancel'>Cancel</button>";
               echo "</form>";
+              echo "</div>";
               echo "</div>";
             }
             else {
@@ -141,7 +143,7 @@
       <p>
         <a href="home.php">Home</a> |
         <a href="announcement.php">Announcements</a> |
-        <a href="communication.html">Contact</a> |
+        <a href="communication.php">Contact</a> |
         <a class="active" href="#">Documents</a> |
         <a href="homework.php">Projects</a>
       </p>

@@ -28,7 +28,7 @@
         <ul id="menu">
           <li><a href="home.php">Home</a></li>
           <li class="current"><a href="#">Announcements</a></li>
-          <li><a href="communication.html">Contact</a></li>
+          <li><a href="communication.php">Contact</a></li>
           <li><a href="documents.php">Documents</a></li>
           <li><a href="homework.php">Projects</a></li>
         </ul>
@@ -93,16 +93,18 @@
             if ($_GET['create'] === 'true')
             {
               echo "<div class='announcement'>";
+              echo "<div class='form_settings'>";
               echo "<form action='scripts/modify.php' method='post'>";
               echo "<h2><strong>Subject:</strong></h2>";
-              echo "<input type='text' placeholder='Type the subject of the announcement' name='subject'><br>";
-              echo "<br><label><b>Text</b></label><br>";
-              echo "<input type='text' placeholder='Type the text of the announcement' name='text'><br>";
+              echo "<input type='text' placeholder='The subject of the announcement' name='subject'><br>";
+              echo "<br><label><b>Announcement</b></label><br>";
+              echo "<textarea rows='8' cols='50' name='text' placeholder='The announcement'></textarea><br>";
               echo "<input type='hidden' value='create' name='action'>";
               echo "<input type='hidden' value='announcement' name='category'>";
               echo "<button class='okbtn' type='submit'>Ok</button>       ";
               echo "<button class='cancelbtn' type='submit' name='cancel' value='cancel'>Cancel</button>";
               echo "</form>";
+              echo "</div>";
               echo "</div>";
             }
             else {
@@ -117,6 +119,7 @@
             if ($_GET['announcement_id'] === $announcement['id'])
             {
               echo "<div class='announcement'>";
+              echo "<div class='form_settings'>";
               echo "<a name='{$announcement['id']}'></a>";
               echo "<form action='scripts/modify.php' method='post'>";
               echo "<h3>Announcement {$announcement['id']} </h3><br>";
@@ -130,6 +133,7 @@
               echo "<button class='okbtn' type='submit'>Ok</button>       ";
               echo "<button class='cancelbtn'  name='cancel' value='cancel'>Cancel</button>";
               echo "</form>";
+              echo "</div>";
               echo "</div>";
             }
             else {
@@ -156,7 +160,7 @@
           <p>
               <a class="home" href="home.php">Home</a> |
               <a class="active" href="#">Announcements</a> |
-              <a href="communication.html">Contact</a> |
+              <a href="communication.php">Contact</a> |
               <a href="documents.php">Documents</a> |
               <a href="homework.php">Projects</a>
           </p>

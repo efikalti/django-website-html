@@ -27,7 +27,7 @@
                 <ul id="menu">
                     <li class="current"><a href="#">Home</a></li>
                     <li><a href="announcement.php">Announcements</a></li>
-                    <li><a href="communication.html">Contact</a></li>
+                    <li><a href="communication.php">Contact</a></li>
                     <li><a href="documents.php">Documents</a></li>
                     <li><a href="homework.php">Projects</a></li>
                 </ul>

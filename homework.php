@@ -26,9 +26,9 @@
       </div>
       <div id="menubar">
         <ul id="menu">
-          <li><a href="index.php">Home</a></li>
+          <li><a href="home.php">Home</a></li>
           <li><a href="announcement.php">Announcements</a></li>
-          <li><a href="communication.html">Contact</a></li>
+          <li><a href="communication.php">Contact</a></li>
           <li><a href="documents.php">Documents</a></li>
           <li class="current"><a href="#">Projects</a></li>
         </ul>
@@ -285,9 +285,9 @@
     </div>
     <div id="footer">
       <p>
-        <a href="index.html">Home</a> |
-        <a href="announcement.html">Announcements</a> |
-        <a href="communication.html">Contact</a> |
+        <a href="home.php">Home</a> |
+        <a href="announcement.php">Announcements</a> |
+        <a href="communication.php">Contact</a> |
         <a href="documents.php">Documents</a> |
         <a class="active" href="#">Projects</a>
       </p>
