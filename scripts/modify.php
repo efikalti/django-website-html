@@ -25,12 +25,32 @@
         header("Location: ../homework.php");
       }
       else {
+        $day =  (int) $_POST['day'];
+        $month = $_POST['month'];
         if ( $_POST['action'] === 'update' ) {
-          modify_assignment($_POST['description'], $_POST['goals'], $_POST['deadline'], $_POST['files'], $_POST['id']);
+          if ( $day <= 28){
+            $date = $_POST['year'] . "-" .  $month . "-" .  $day . " " . $_POST['hour'] . ":00:00" ;
+            modify_assignment($_POST['description'], $_POST['goals'], $date, $_POST['files'], $_POST['id']);
+            header("Location: ../homework.php");
+          }
+          elseif ( $day > 28 && $month == "02"){
+            $_SESSION['errDate'] = 'Selected date is wrong.';
+            header("Location: ../homework.php?assignment_id={$_POST['id']}#{$_POST['id']}");
+          }
+          elseif ( $day > 30){
+            if (in_array($month, $months_30)) {
+              $_SESSION['errDate'] = 'Selected date is wrong.';
+              header("Location: ../homework.php?assignment_id={$_POST['id']}#{$_POST['id']}");
+
+            }
+            else {
+              $date = $_POST['year'] . "-" .  $month . "-" .  $day . " " . $_POST['hour'] . ":00:00" ;
+              modify_assignment($_POST['description'], $_POST['goals'], $date, $_POST['files'], $_POST['id']);
+              header("Location: ../homework.php");
+            }
+          }
         }
         elseif ($_POST['action'] === 'create') {
-          $day =  (int) $_POST['day'];
-          $month = $_POST['month'];
           if ( $day <= 28){
             $date = $_POST['year'] . "-" .  $month . "-" .  $day . " " . $_POST['hour'] . ":00:00" ;
             create_assignment($_POST['description'], $_POST['goals'], $date, $_POST['files']);
@@ -50,7 +70,6 @@
               $date = $_POST['year'] . "-" .  $month . "-" .  $day . " " . $_POST['hour'] . ":00:00" ;
               create_assignment($_POST['description'], $_POST['goals'], $date, $_POST['files']);
               header("Location: ../homework.php");
-
             }
           }
         }

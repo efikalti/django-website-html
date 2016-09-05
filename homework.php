@@ -171,7 +171,72 @@
               echo "<h2><strong>Files:</strong></h2>";
               echo "<input type='textarea' value='{$assignment['files']}' name='files'><br>";
               echo "<h2><strong>Deadline:</strong></h2>";
-              echo "<input type='date' value='{$assignment['deadline']}' name='deadline'><br>";
+              $dates = explode(" ", $assignment['deadline']);
+              $date = explode("-", $dates[0]);
+              $hours = explode(":", $dates[1]);
+              $hour = $hours[0];
+              $year = $date[0];
+              $month = $date[1];
+              $day = $date[2];
+              if ($_SESSION['errDate'])
+              {
+                echo "<div class='error'> *{$_SESSION['errDate']} <br><br></div>";
+                unset($_SESSION['errDate']);
+              }
+              echo "<p>";
+              echo "Hour:  <select name='hour' size=1>";
+              $days = "";
+              for ($i = 1; $i <= 24; $i++) {
+                  if ( $i < 10 ){
+                    $i = "0" . $i;
+                  }
+                  if ( $i == $hour ){
+                    $part = "<option value='$i' selected>$i</option>";
+                  }
+                  else{
+                    $part = "<option value='$i'>$i</option>";
+                  }
+                  $days .= $part;
+              }
+              echo "$days";
+              echo "</select>";
+              echo "   Day:  <select name='day' size=1>";
+              $days = "";
+              for ($i = 1; $i <= 31; $i++) {
+                  if ( $i < 10 ){
+                    $i = "0" . $i;
+                  }
+                  if ( $i == $day ){
+                    $part = "<option value='$i' selected>$i</option>";
+                  }
+                  else{
+                    $part = "<option value='$i'>$i</option>";
+                  }
+                  $days .= $part;
+              }
+              echo "$days";
+              echo "</select>";
+              echo "   Month:  <select name='month' size=1>";
+              $months = "";
+              for ($i = 1; $i <= 12; $i++) {
+                  if ( $i < 10 ){
+                    $i = "0" . $i;
+                  }
+                  if ( $i == $month ){
+                    $part = "<option value='$i' selected>$i</option>";
+                  }
+                  else{
+                    $part = "<option value='$i'>$i</option>";
+                  }
+                  $months .= $part;
+              }
+              echo "$months";
+              echo "</select>";
+              echo "  Year:  <select name='year' size=1>";
+              echo "<option value='2016'>2016</option>";
+              echo "<option value='2017'>2017</option>";
+              echo "</select>";
+              echo "</p>";
               echo "<input type='hidden' value='{$assignment['id']}' name='id'>";
               echo "<input type='hidden' value='update' name='action'>";
               echo "<input type='hidden' value='assignment' name='category'>";

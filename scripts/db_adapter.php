@@ -216,7 +216,7 @@
     check_connection();
 
     try {
-      $sql = "UPDATE Assignment SET description='$description', goals='$goals', deadline=now(), files='$files' WHERE id='$id'";
+      $sql = "UPDATE Assignment SET description='$description', goals='$goals', deadline='$deadline', files='$files' WHERE id='$id'";
       $stmt = $conn->prepare($sql);
       $stmt->execute();
     }
