@@ -84,6 +84,23 @@
     $conn = null;
   }
 
+  function get_tutors()
+  {
+    global $conn;
+    check_connection();
+
+    try {
+      $statement = $conn->prepare("select * from User where role is 'tutor'", array(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true));
+      $statement->execute();
+      return $statement;
+
+    }
+    catch(Exception $e) {
+        echo $sql . "<br>" . $e->getMessage();
+    }
+    $conn = null;
+  }
+
   function get_announcements()
   {
     global $conn;
