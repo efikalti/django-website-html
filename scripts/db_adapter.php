@@ -84,6 +84,54 @@
     $conn = null;
   }
 
+  function modify_user($username, $password, $name, $surname, $role, $id)
+  {
+    global $conn;
+    check_connection();
+
+    try {
+      $sql = "UPDATE User SET username='$username', password='$password', date='$name', name='$name', surname='$surname', role='$role' WHERE id='$id'";
+      $stmt = $conn->prepare($sql);
+      $stmt->execute();
+    }
+    catch(Exception $e) {
+        echo $sql . "<br>" . $e->getMessage();
+    }
+    $conn = null;
+  }
+
+  function delete_user($id)
+  {
+    global $conn;
+    check_connection();
+
+    try {
+      $sql = "DELETE FROM User WHERE id='$id'";
+      $conn->exec($sql);
+    }
+    catch(Exception $e) {
+        echo $sql . "<br>" . $e->getMessage();
+    }
+    $conn = null;
+  }
+
+  function get_users()
+  {
+    global $conn;
+    check_connection();
+
+    try {
+      $statement = $conn->prepare("select * from User", array(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true));
+      $statement->execute();
+      return $statement;
+
+    }
+    catch(Exception $e) {
+        echo $sql . "<br>" . $e->getMessage();
+    }
+    $conn = null;
+  }
+
   function get_tutors()
   {
     global $conn;

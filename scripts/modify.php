@@ -84,7 +84,7 @@
           modify_file($_POST['description'], $_POST['filepath'], $_POST['id']);
         }
         elseif ($_POST['action'] === 'create') {
-          $target_dir = "/var/www/django-website-html/docs/";
+          $target_dir = "../docs/";
           $target_file = $target_dir . basename($_FILES["file"]["name"]);
           if (file_exists($target_file)) {
             $_SESSION['errFile'] = "File already exists.";
@@ -104,7 +104,20 @@
             }
           }
         }
-
+      }
+    }
+    elseif ($_POST['category'] === 'user') {
+      if (isset($_POST['cancel'])) {
+        header("Location: ../users.php");
+      }
+      else {
+        if ( $_POST['action'] === 'update' ) {
+          modify_user($_POST['username'], $_POST['password'],  $_POST['name'],  $_POST['surname'],  $_POST['role'], $_POST['id']);
+        }
+        elseif ($_POST['action'] === 'create') {
+          create_user($_POST['username'], $_POST['password'],  $_POST['name'],  $_POST['surname'],  $_POST['role']);
+          header("Location: ../users.php");
+        }
       }
     }
    }
@@ -129,6 +142,12 @@
          }
          delete_file($_GET['file_id']);
          header("Location: ../documents.php");
+       }
+     }
+     elseif ($_GET['category'] === 'user') {
+       if (isset($_GET['delete']) && isset($_GET['user_id'])) {
+         delete_user($_GET['user_id']);
+         header("Location: ../users.php");
        }
      }
    }

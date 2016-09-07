@@ -30,6 +30,12 @@
                     <li><a href="communication.php">Contact</a></li>
                     <li><a href="documents.php">Documents</a></li>
                     <li><a href="homework.php">Projects</a></li>
+                    <?php
+                      if ( $_SESSION['role'] === 'tutor' )
+                      {
+                        echo "<li><a href='users.php'>Users</a></li>";
+                      }
+                    ?>
                 </ul>
             </div>
         </div>
@@ -44,10 +50,6 @@
                   <?php
                     echo "<h4>Username:</h4> {$_SESSION['username']}";
                     echo "<h4>Role:</h4> {$_SESSION['role']}";
-                    if ( $_SESSION['role'] === 'tutor' )
-                    {
-                      echo "<br><br><a href='sign_up.php'>Create an account</a></p>";
-                    }
                   ?>
                   <br>
                   <form action="scripts/logout.php">
@@ -119,6 +121,12 @@
                 <a href="communication.html">Contact</a> |
                 <a href="documents.php">Documents</a> |
                 <a href="homework.php">Projects</a>
+                <?php
+                  if ( $_SESSION['role'] === 'tutor' )
+                  {
+                    echo " | href='users.php'>Users</a>";
+                  }
+                ?>
             </p>
         </div>
     </div>
