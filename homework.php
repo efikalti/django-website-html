@@ -94,11 +94,11 @@
               echo "<div class='announcement'>";
               echo "<form action='scripts/modify.php' method='post'>";
               echo "<h2><strong>Goals:</strong></h2>";
-              echo "<input type='textarea' placeholder='Type the goals of the assignment separated by commas' name='goals'><br>";
+              echo "<input type='sign_text' placeholder='Type the goals of the assignment separated by commas' name='goals'><br>";
               echo "<br><label><b>Description</b></label><br>";
-              echo "<input type='textarea' placeholder='Type the description of the assignment' name='description'><br>";
+              echo "<input type='sign_text' placeholder='Type the description of the assignment' name='description'><br>";
               echo "<br><label><b>Files</b></label><br>";
-              echo "<input type='textarea' placeholder='List the deriverables files for the assignment separated by commas' name='files'><br>";
+              echo "<input type='sign_text' placeholder='List the deriverables files for the assignment separated by commas' name='files'><br>";
               echo "<br><label><b>Deadline</b></label><br>";
               if ($_SESSION['errDate'])
               {
@@ -167,11 +167,11 @@
               echo "<form action='scripts/modify.php' method='post'>";
               echo "<h3>Assignment {$assignment['id']} </h3><br>";
               echo "<h2><strong>Goals:</strong></h2>";
-              echo "<input type='textarea' value='{$assignment['goals']}' name='goals'><br>";
+              echo "<input type='sign_text' value='{$assignment['goals']}' name='goals'><br>";
               echo "<br><label><b>Description</b></label><br>";
-              echo "<input type='textarea' value='{$assignment['description']}' name='description'><br>";
+              echo "<input type='sign_text' value='{$assignment['description']}' name='description'><br>";
               echo "<h2><strong>Files:</strong></h2>";
-              echo "<input type='textarea' value='{$assignment['files']}' name='files'><br>";
+              echo "<input type='sign_text' value='{$assignment['files']}' name='files'><br>";
               echo "<h2><strong>Deadline:</strong></h2>";
               $dates = explode(" ", $assignment['deadline']);
               $date = explode("-", $dates[0]);
@@ -292,6 +292,12 @@
         <a href="communication.php">Contact</a> |
         <a href="documents.php">Documents</a> |
         <a class="active" href="#">Projects</a>
+        <?php
+          if ( $_SESSION['role'] === 'tutor' )
+          {
+            echo " | <a href='users.php'>Users</a>";
+          }
+        ?>
       </p>
     </div>
   </div>

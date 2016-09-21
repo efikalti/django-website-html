@@ -1,6 +1,5 @@
 <?php
-   session_start();
-   $servername = 'localhost';
+   $servername = 'webpagesdb.it.auth.gr';
    $username = 'django-web';
    $password = 'django-web';
    $dbname = 'django-web';
@@ -90,7 +89,7 @@
     check_connection();
 
     try {
-      $sql = "UPDATE User SET username='$username', password='$password', date='$name', name='$name', surname='$surname', role='$role' WHERE id='$id'";
+      $sql = "UPDATE User SET username='$username', password='$password', name='$name', surname='$surname', role='$role' WHERE id='$id'";
       $stmt = $conn->prepare($sql);
       $stmt->execute();
     }
@@ -138,7 +137,7 @@
     check_connection();
 
     try {
-      $statement = $conn->prepare("select * from User where role is 'tutor'", array(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true));
+      $statement = $conn->prepare("select * from User where role = 'tutor'", array(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true));
       $statement->execute();
       return $statement;
 
@@ -245,7 +244,7 @@
     }
     $conn = null;
   }
-  function create_assignment($description, $goals, $deadline, $files, $date)
+  function create_assignment($description, $goals, $deadline, $files)
   {
     global $conn;
     check_connection();

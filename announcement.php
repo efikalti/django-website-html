@@ -160,7 +160,7 @@
 
       <div id="footer">
           <p>
-              <a class="home" href="home.php">Home</a> |
+              <a href="home.php">Home</a> |
               <a class="active" href="#">Announcements</a> |
               <a href="communication.php">Contact</a> |
               <a href="documents.php">Documents</a> |
@@ -168,7 +168,7 @@
               <?php
                 if ( $_SESSION['role'] === 'tutor' )
                 {
-                  echo " | href='users.php'>Users</a>";
+                  echo " | <a href='users.php'>Users</a>";
                 }
               ?>
           </p>

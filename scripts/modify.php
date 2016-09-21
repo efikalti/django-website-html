@@ -1,5 +1,4 @@
 <?php
-   session_start();
    require("db_adapter.php");
    $months_30 = [
        "04" , "06", "09", "11"
@@ -68,6 +67,7 @@
             }
             else {
               $date = $_POST['year'] . "-" .  $month . "-" .  $day . " " . $_POST['hour'] . ":00:00" ;
+              echo $date;
               create_assignment($_POST['description'], $_POST['goals'], $date, $_POST['files']);
               header("Location: ../homework.php");
             }
@@ -118,6 +118,7 @@
           create_user($_POST['username'], $_POST['password'],  $_POST['name'],  $_POST['surname'],  $_POST['role']);
           header("Location: ../users.php");
         }
+        header("Location: ../users.php");
       }
     }
    }

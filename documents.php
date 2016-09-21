@@ -148,6 +148,12 @@
         <a href="communication.php">Contact</a> |
         <a class="active" href="#">Documents</a> |
         <a href="homework.php">Projects</a>
+        <?php
+          if ( $_SESSION['role'] === 'tutor' )
+          {
+            echo " | <a href='users.php'>Users</a>";
+          }
+        ?>
       </p>
     </div>
   </div>

@@ -124,7 +124,7 @@
                 <?php
                   if ( $_SESSION['role'] === 'tutor' )
                   {
-                    echo " | href='users.php'>Users</a>";
+                    echo " | <a href='users.php'>Users</a>";
                   }
                 ?>
             </p>
